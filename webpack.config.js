@@ -1,15 +1,16 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const isDev = process.env.NODE_ENV === 'development';
-const isProd = !isDev;
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = !isDev
 
-const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+const filename = (ext) =>
+    isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
 
-module.exports ={
+module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     entry: './js/main.js',
@@ -27,15 +28,15 @@ module.exports ={
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template:path.resolve(__dirname, 'src/index.html'),
+            template: path.resolve(__dirname, 'src/index.html'),
             filename: 'index.html',
             minify: {
-                collapseWhitespace: isProd
-            }
+                collapseWhitespace: isProd,
+            },
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename:`./css/${filename('css')}`,           
+            filename: `./css/${filename('css')}`,
         }),
         // new CopyWebpackPlugin({
         //     patterns: [
@@ -45,8 +46,8 @@ module.exports ={
         // }),
     ],
     // devtool: isProd ? false : 'source-map',
-    module:{
-        rules:[
+    module: {
+        rules: [
             {
                 test: /\.html$/,
                 loader: 'html-loader',
@@ -69,6 +70,6 @@ module.exports ={
             //         }
             //     }],
             // }
-        ]
-    }
-};
+        ],
+    },
+}
